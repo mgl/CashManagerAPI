@@ -4,6 +4,10 @@ const URI: string = Deno.env.get("DB_URI")
   ? Deno.env.get("DB_URI")!
   : "mongodb://localhost:27017";
 
+const database = Deno.env.get("DB_NAME")
+  ? Deno.env.get("DB_NAME")!
+  : "cashmanager";
+
 const mongoClient: MongoClient = new MongoClient();
 try {
   await mongoClient.connect(URI);
@@ -13,4 +17,7 @@ try {
   Deno.exit(1);
 }
 
-export { mongoClient };
+const db = mongoClient.database(database);
+db.createCollection("bankaccounts");
+
+export { db };

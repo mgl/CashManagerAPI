@@ -1,5 +1,7 @@
+import { ObjectId } from "https://deno.land/x/web_bson@v0.2.5/mod.ts";
 import { Application, Router } from "../deps.ts";
-import { mongoClient } from "./db/mongo.ts";
+import { db } from "./db/mongo.ts";
+import { Bson } from '../deps.ts';
 
 const router: Router = new Router();
 const port: number = Deno.env.get("PORT")
@@ -17,7 +19,5 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 console.log(`CashManager API server running on port ${port}`);
-
-// console.log(await mongoClient.listDatabases());
 
 await app.listen({ port });
