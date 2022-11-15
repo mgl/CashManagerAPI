@@ -2,6 +2,8 @@ FROM denoland/deno:latest
 
 EXPOSE 8080
 
+RUN apt-get update && apt-get install git -y
+
 WORKDIR /app
 
 COPY deps.ts .
