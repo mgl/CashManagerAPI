@@ -1,4 +1,4 @@
-FROM denoland/deno:latest
+FROM lukechannings/deno:latest
 
 EXPOSE 8080
 
