@@ -4,7 +4,7 @@ const router = new Router();
 const port = 8080;
 router
   .get("/", (context) => {
-    context.response.body = "CashManager API";
+    context.response.body = "CashManager API test commit";
   })
 
 const app = new Application();
