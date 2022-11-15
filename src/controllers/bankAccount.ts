@@ -1,5 +1,5 @@
 // interfaces
-import BankAccount from "../interfaces/bankAccount.ts";
+import bankAccount from "../interfaces/bankAccount.ts";
 // models
 import BankAccountModel from "../models/bankAccount.ts";
 
