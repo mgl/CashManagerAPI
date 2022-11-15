@@ -1,42 +1,43 @@
-import client from "../db/client.ts";
-// config
-import { TABLE } from "../db/config.ts";
-// Interface
-import { BankAccount } from "../interfaces/BankAccount.ts";
+import { db } from "../db/mongo.ts"
+import { BankAccount } from "../interfaces/bankAccount.ts"
+
+const collectionName: string = Deno.env.get("COLLECTION_NAME") ? Deno.env.get("COLLECTION_NAME")! : "bankAccounts"
+
+const bankAccounts = db.collection<BankAccount>(collectionName)
 
 export default {
+
   /**
-   * Takes in the id params & checks if the todo item exists
+   * Takes in the id params & checks if the bank account item exists
    * in the database
    * @param id
-   * @returns boolean to tell if an entry of todo exits in table
+  * @returns boolean to tell if an entry of bank account exists
    */
   doesExistById: async ({ _id }: BankAccount) => {
-    const [result] = await client.query(
-      `SELECT COUNT(*) count FROM ${TABLE.TODO} WHERE id = ? LIMIT 1`,
-      [_id],
-    );
-    return result.count > 0;
+    const count = await bankAccounts.estimatedDocumentCount({
+      _id: { $ne: null },
+    })
+    return count > 0
   },
+
   /**
-   * Will return all the entries in the todo column
-   * @returns array of todos
+   * Will return all the entries
+   * @returns array of bank account entries
    */
   getAll: async () => {
-    return await client.query(`SELECT * FROM ${TABLE.TODO}`);
+    return await bankAccounts.find({ username: { $ne: null } }).toArray()
   },
+
   /**
-   * Takes in the id params & returns the todo item found
+   * Takes in the id params & returns the bank account item found
    * against it.
    * @param id
    * @returns object of todo item
    */
   getById: async ({ _id }: BankAccount) => {
-    return await client.query(
-      `SELECT * FROM ${TABLE.TODO} WHERE id = ?`,
-      [_id],
-    );
+    return await bankAccounts.findOne({ _id: _id })
   },
+
   /**
    * Adds a new todo item to todo table
    * @param todo
@@ -51,8 +52,9 @@ export default {
         todo,
         isCompleted,
       ],
-    );
+    )
   },
+
   /**
    * Updates the content of a single todo item
    * @param id
@@ -68,10 +70,11 @@ export default {
         isCompleted,
         _id,
       ],
-    );
+    )
     // return count of rows updated
-    return result.affectedRows;
+    return result.affectedRows
   },
+
   /**
    * Deletes a todo by ID
    * @param id
@@ -80,9 +83,9 @@ export default {
   deleteById: async ({ _id }: BankAccount) => {
     const result = await client.query(
       `DELETE FROM ${TABLE.TODO} WHERE id = ?`,
-      [_id],
-    );
+      [id],
+    )
     // return count of rows updated
-    return result.affectedRows;
+    return result.affectedRows
   },
-};
+}
