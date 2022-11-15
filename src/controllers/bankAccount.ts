@@ -1,6 +1,4 @@
-// interfaces
-import bankAccount from "../interfaces/bankAccount.ts";
-// models
+import { BankAccount } from "../interfaces/bankAccount.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
@@ -80,7 +78,9 @@ export default {
         return;
       }
 
-      const todo: BankAccount = await BankAccountModel.getById({ id: Number(params.id) });
+      const todo: BankAccount = await BankAccountModel.getById({
+        id: Number(params.id),
+      });
       response.status = 200;
       response.body = {
         success: true,
