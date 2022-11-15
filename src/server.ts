@@ -13,7 +13,10 @@ router
 const app = new Application();
 
 app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(router.allowedMethods())
+
+app.use(routerAccount.routes());
+app.use(routerAccount.allowedMethods());
 
 console.log(`CashManager API server running on port ${port}`);
 

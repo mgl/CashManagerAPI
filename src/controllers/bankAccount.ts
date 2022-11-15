@@ -25,12 +25,10 @@ export default {
 
   /**
    * @description Add a new bank account
-   * @route POST /accounts
+   * @route POST /api/accounts
    */
-  create: async (
-    { request, response }: { request: any; response: any },
-  ) => {
-    const body = await request.body();
+  create: async ({ request, response }: { request: any; response: any }) => {
+    const body = await request.body().value;
     if (!request.hasBody) {
       response.status = 400;
       response.body = {
@@ -39,6 +37,13 @@ export default {
       };
       return;
     }
+
+    /*const bidule = body
+    response.status = 200;
+    response.body = {
+        dump: bidule
+    };
+    return */
 
     try {
       await BankAccountModel.add(
@@ -66,7 +71,7 @@ export default {
   ) => {
     try {
       const isAvailable = await BankAccountModel.doesExistById(
-        { id: Number(params.id) },
+        { _id: Number(params.id) },
       );
 
       if (!isAvailable) {
