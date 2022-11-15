@@ -2,7 +2,7 @@ FROM denoland/deno:latest
 
 EXPOSE 8080
 
-USER deno
+WORKDIR /app
 
 COPY deps.ts .
 RUN deno cache deps.ts

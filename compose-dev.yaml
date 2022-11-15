@@ -1,28 +1,37 @@
-version: '3'
+version: "3"
 services:
   deno:
     build:
       dockerfile: Dockerfile
       context: .
     environment:
-    - PORT=8080
-    - DB_URI=mongodb://root:root@mongo:27017/
-    - DB=cashmanager
+      - PORT=8080
+      - DB_URI=mongodb://root:root@mongo:27017/
+      - DB=cashmanager
+    depends_on:
+      - mongo
     expose:
-    - 8080
+      - 8080
     ports:
-    - 8080:8080
+      - 8080:8080
+    volumes:
+      - type: bind
+        source: .
+        target: /app
 
   mongo:
-    image: mongo
-    restart: always
+    image: mongo:latest
+    restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: cashmanager
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
 
   mongo-express:
-    image: mongo-express
+    image: mongo-express:latest
     restart: always
     ports:
       - 8081:8081
@@ -30,3 +39,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
       ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+
+volumes:
+  mongodb:
+  mongodb_config:
