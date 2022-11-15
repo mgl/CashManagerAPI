@@ -1,5 +1,5 @@
 // interfaces
-import Todo from "../interfaces/Todo.ts";
+import BankAccount from "../interfaces/bankAccount.ts";
 // models
 import TodoModel from "../models/todo.ts";
 

@@ -18,6 +18,5 @@ try {
 }
 
 const db = mongoClient.database(database);
-db.createCollection("bankaccounts");
 
 export { db };
