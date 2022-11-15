@@ -1,9 +1,8 @@
-// interfaces
-import bankAccount from "../interfaces/bankAccount.ts";
-// models
+import { BankAccount } from "../interfaces/bankAccount.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
+
   /**
    * @description Get all bank accounts
    * @route GET /accounts
@@ -27,20 +26,25 @@ export default {
 
   /**
    * @description Add a new bank account
-   * @route POST /accounts
+   * @route POST /api/accounts
    */
-  create: async (
-    { request, response }: { request: any; response: any },
-  ) => {
-    const body = await request.body();
+  create: async ({ request, response }: { request: any; response: any }, ) => {
+    const body = await request.body().value;
     if (!request.hasBody) {
-      response.status = 400;
-      response.body = {
-        success: false,
-        message: "No data provided",
-      };
-      return;
+        response.status = 400;
+        response.body = {
+            success: false,
+            message: "No data provided",
+        };
+        return;
     }
+
+    /*const bidule = body
+    response.status = 200;
+    response.body = {
+        dump: bidule
+    };
+    return */
 
     try {
       await BankAccountModel.add(
@@ -68,7 +72,7 @@ export default {
   ) => {
     try {
       const isAvailable = await BankAccountModel.doesExistById(
-        { id: Number(params.id) },
+        { _id: Number(params.id) },
       );
 
       if (!isAvailable) {
@@ -80,7 +84,9 @@ export default {
         return;
       }
 
-      const todo: BankAccount = await BankAccountModel.getById({ id: Number(params.id) });
+      const todo: BankAccount = await BankAccountModel.getById({
+        _id: Number(params.id),
+      });
       response.status = 200;
       response.body = {
         success: true,
