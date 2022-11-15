@@ -2,7 +2,7 @@ import client from "../db/client.ts";
 // config
 import { TABLE } from "../db/config.ts";
 // Interface
-import Todo from "../interfaces/Todo.ts";
+import { BankAccount } from "../interfaces/BankAccount.ts";
 
 export default {
   /**
@@ -11,10 +11,10 @@ export default {
    * @param id
    * @returns boolean to tell if an entry of todo exits in table
    */
-  doesExistById: async ({ id }: Todo) => {
+  doesExistById: async ({ _id }: BankAccount) => {
     const [result] = await client.query(
       `SELECT COUNT(*) count FROM ${TABLE.TODO} WHERE id = ? LIMIT 1`,
-      [id],
+      [_id],
     );
     return result.count > 0;
   },
@@ -31,10 +31,10 @@ export default {
    * @param id
    * @returns object of todo item
    */
-  getById: async ({ id }: Todo) => {
+  getById: async ({ _id }: BankAccount) => {
     return await client.query(
       `SELECT * FROM ${TABLE.TODO} WHERE id = ?`,
-      [id],
+      [_id],
     );
   },
   /**
@@ -43,7 +43,7 @@ export default {
    * @param isCompleted
    */
   add: async (
-    { todo, isCompleted }: Todo,
+    { todo, isCompleted }: BankAccount,
   ) => {
     return await client.query(
       `INSERT INTO ${TABLE.TODO}(todo, isCompleted) values(?, ?)`,
@@ -60,13 +60,13 @@ export default {
    * @param isCompleted
    * @returns integer (count of effect rows)
    */
-  updateById: async ({ id, todo, isCompleted }: Todo) => {
+  updateById: async ({ _id, todo, isCompleted }: BankAccount) => {
     const result = await client.query(
       `UPDATE ${TABLE.TODO} SET todo=?, isCompleted=? WHERE id=?`,
       [
         todo,
         isCompleted,
-        id,
+        _id,
       ],
     );
     // return count of rows updated
@@ -77,10 +77,10 @@ export default {
    * @param id
    * @returns integer (count of effect rows)
    */
-  deleteById: async ({ id }: Todo) => {
+  deleteById: async ({ _id }: BankAccount) => {
     const result = await client.query(
       `DELETE FROM ${TABLE.TODO} WHERE id = ?`,
-      [id],
+      [_id],
     );
     // return count of rows updated
     return result.affectedRows;

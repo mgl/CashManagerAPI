@@ -1,16 +1,16 @@
 // interfaces
-import Todo from "../interfaces/Todo.ts";
+import { BankAccount } from "../interfaces/BankAccount.ts";
 // models
-import TodoModel from "../models/todo.ts";
+import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
   /**
-   * @description Get all todos
-   * @route GET /todos
+   * @description Get all bank accounts
+   * @route GET /accounts
    */
-  getAllTodos: async ({ response }: { response: any }) => {
+  getAll: async ({ response }: { response: any }) => {
     try {
-      const data = await TodoModel.getAll();
+      const data = await BankAccountModel.getAll();
       response.status = 200;
       response.body = {
         success: true,
@@ -26,10 +26,10 @@ export default {
   },
 
   /**
-   * @description Add a new todo
-   * @route POST /todos
+   * @description Add a new bank account
+   * @route POST /accounts
    */
-  createTodo: async (
+  create: async (
     { request, response }: { request: any; response: any },
   ) => {
     const body = await request.body();
@@ -43,7 +43,7 @@ export default {
     }
 
     try {
-      await TodoModel.add(
+      await BankAccountModel.add(
         { todo: body.value.todo, isCompleted: false },
       );
       response.body = {
@@ -60,14 +60,14 @@ export default {
   },
 
   /**
-   * @description Get todo by id
-   * @route GET todos/:id
+   * @description Get bank account by id
+   * @route GET /accounts/:id
    */
-  getTodoById: async (
+  getById: async (
     { params, response }: { params: { id: string }; response: any },
   ) => {
     try {
-      const isAvailable = await TodoModel.doesExistById(
+      const isAvailable = await BankAccountModel.doesExistById(
         { id: Number(params.id) },
       );
 
@@ -80,7 +80,7 @@ export default {
         return;
       }
 
-      const todo: Todo = await TodoModel.getById({ id: Number(params.id) });
+      const todo: BankAccount = await BankAccountModel.getById({ id: Number(params.id) });
       response.status = 200;
       response.body = {
         success: true,
@@ -96,10 +96,10 @@ export default {
   },
 
   /**
-   * @description Update todo by id
-   * @route PUT todos/:id
+   * @description Update bank account by id
+   * @route PUT /accounts/:id
    */
-  updateTodoById: async (
+  updateById: async (
     { params, request, response }: {
       params: { id: string };
       request: any;
@@ -107,7 +107,7 @@ export default {
     },
   ) => {
     try {
-      const isAvailable = await TodoModel.doesExistById(
+      const isAvailable = await BankAccountModel.doesExistById(
         { id: Number(params.id) },
       );
       if (!isAvailable) {
@@ -121,7 +121,7 @@ export default {
 
       // if todo found then update todo
       const body = await request.body();
-      const updatedRows = await TodoModel.updateById({
+      const updatedRows = await BankAccountModel.updateById({
         id: Number(params.id),
         ...body.value,
       });
@@ -140,14 +140,14 @@ export default {
   },
 
   /**
-   * @description Delete todo by id
-   * @route DELETE todos/:id
+   * @description Delete bank account by id
+   * @route DELETE /accounts/:id
    */
-  deleteTodoById: async (
+  deleteById: async (
     { params, response }: { params: { id: string }; response: any },
   ) => {
     try {
-      const updatedRows = await TodoModel.deleteById({
+      const updatedRows = await BankAccountModel.deleteById({
         id: Number(params.id),
       });
       response.status = 200;
