@@ -12,5 +12,3 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 await app.listen({ port });
-
-const bidule = "testcommit"
