@@ -2,7 +2,7 @@ import { BankAccount } from "../interfaces/bankAccount.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 // Pour debug :
-    /*const bidule = body
+/*const bidule = body
     response.status = 200;
     response.body = {
         dump: bidule
@@ -20,7 +20,7 @@ export default {
       response.status = 200;
       response.body = {
         success: true,
-        data
+        data,
       };
     } catch (error) {
       response.status = 400;
@@ -36,9 +36,8 @@ export default {
    * @route POST /api/accounts
    */
   create: async ({ request, response }: { request: any; response: any }) => {
-
     const body = await request.body().value;
-    
+
     if (!request.hasBody) {
       response.status = 400;
       response.body = {
@@ -49,19 +48,17 @@ export default {
     }
 
     try {
-
       await BankAccountModel.add({
         account_number: body.account_number,
         firstname: body.firstname,
         lastname: body.lastname,
-        balance: body.balance
+        balance: body.balance,
       });
 
       response.body = {
         success: true,
-        message: "The record was added successfully"
+        message: "The record was added successfully",
       };
-
     } catch (error) {
       response.status = 400;
       response.body = {
@@ -75,10 +72,12 @@ export default {
    * @description Get bank account by id
    * @route GET /accounts/:account_num
    */
-  getByAccountNum: async ({ params, response }: { params: { account_num: string }; response: any } ) => {
+  getByAccountNum: async (
+    { params, response }: { params: { account_num: string }; response: any },
+  ) => {
     try {
       const isAvailable = await BankAccountModel.getByAccountNumber(
-        { account_num: Number(params.account_num) }
+        { account_num: Number(params.account_num) },
       );
 
       if (!isAvailable) {

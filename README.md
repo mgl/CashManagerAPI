@@ -1,6 +1,7 @@
 # CashManagerAPI
 
 ## Diagramme de séquence
+
 ```mermaid
 sequenceDiagram
     participant A as Utilisateur
