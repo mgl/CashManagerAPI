@@ -76,8 +76,9 @@ export default {
     { params, response }: { params: { account_num: string }; response: any },
   ) => {
     try {
+      console.log(params.account_num);
       const isAvailable = await BankAccountModel.getByAccountNumber(
-        { account_num: Number(params.account_num) },
+        { accountNumber: Number(params.account_num) }
       );
 
       if (!isAvailable) {
