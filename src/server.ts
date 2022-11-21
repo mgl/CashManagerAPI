@@ -1,4 +1,5 @@
 import { Application, Router } from "../deps.ts";
+import routerAccount from "./routes/bankAccount.ts"
 
 const router: Router = new Router();
 const port: number = Deno.env.get("PORT")
