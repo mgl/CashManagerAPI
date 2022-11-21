@@ -68,11 +68,10 @@ export default {
    * @returns null if bank account is not added
    */
   add: async (bankAccount: BankAccount) => {
-    const { _id } = bankAccount;
-    const bankAccountExists = await bankAccounts.findOne({ _id: _id });
+    const bankAccountExists = await bankAccounts.findOne({ account_number: bankAccount.account_number });
 
     if (bankAccountExists) {
-      return null;
+      return bankAccountExists;
     }
 
     const id = await bankAccounts.insertOne(bankAccount);
