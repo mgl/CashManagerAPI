@@ -1,7 +1,9 @@
 import { db } from "../db/mongo.ts";
 import { BankAccount } from "../interfaces/bankAccount.ts";
 
-const collectionName: string = Deno.env.get("ACCOUNTS_COLLECTION_NAME") ? Deno.env.get("ACCOUNTS_COLLECTION_NAME")! : "bankAccounts";
+const collectionName: string = Deno.env.get("ACCOUNTS_COLLECTION_NAME")
+  ? Deno.env.get("ACCOUNTS_COLLECTION_NAME")!
+  : "bankAccounts";
 
 const bankAccounts = db.collection<BankAccount>(collectionName);
 
@@ -66,7 +68,9 @@ export default {
    * @returns null if bank account is not added
    */
   add: async (bankAccount: BankAccount) => {
-    const bankAccountExists = await bankAccounts.findOne({ account_number: bankAccount.account_number });
+    const bankAccountExists = await bankAccounts.findOne({
+      account_number: bankAccount.account_number,
+    });
 
     if (bankAccountExists) {
       throw new Error("Account already exist");
