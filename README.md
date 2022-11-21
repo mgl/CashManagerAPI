@@ -36,3 +36,40 @@ sequenceDiagram
         end
     end
 ```
+
+## Diagramme de classe
+
+```mermaid
+classDiagram
+    class BankAccount{
+        +String _id
+        +String num_account
+        +String lastname
+        +String firstname
+        +int balance
+        +add()
+        +getCount()
+        +getAll()
+        +getById()
+        +update()
+        +deleteById()
+    }
+
+    class Transaction{
+        +String _id
+        +Date date
+        +String description
+        +int amount
+        +BankAccount from
+        +BankAccount to
+
+        +add()
+        +getCount()
+        +getAll()
+        +getById()
+        +update()
+        +deleteById()
+    }
+
+    Transaction "*" --> "1" BankAccount
+```
