@@ -18,6 +18,19 @@ export default {
   },
 
   /**
+   * @description Get bank account by account number
+   *
+   * @param {number} accountNumber
+   * @returns bank account
+   *
+   * @example
+   * await bankmodel.getById(123456789);
+   */
+  getByAccountNumber: async (accountNumber: number) => {
+    return await bankAccounts.findOne({ accountNumber: accountNumber });
+  },
+
+  /**
    * @description Will return all the entries
    *
    * @returns array of bank account entries
