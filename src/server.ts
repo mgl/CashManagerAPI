@@ -1,5 +1,6 @@
-import { Application, Router } from "../deps.ts";
-import routerAccount from "./routes/bankAccount.ts";
+import { Application, Router } from '../deps.ts';
+import Logger from './middlewares/logger.ts';
+import routerAccount from './routes/bankAccount.ts';
 
 const router: Router = new Router();
 const port: number = Deno.env.get("PORT")
@@ -12,6 +13,9 @@ router
   });
 
 const app = new Application();
+
+app.use(Logger.logger);
+app.use(Logger.responseTime);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
