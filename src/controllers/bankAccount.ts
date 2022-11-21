@@ -1,10 +1,18 @@
 import { BankAccount } from "../interfaces/bankAccount.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
+// Pour debug :
+    /*const bidule = body
+    response.status = 200;
+    response.body = {
+        dump: bidule
+    };
+    return */
+
 export default {
   /**
    * @description Get all bank accounts
-   * @route GET /accounts
+   * @route GET /api/accounts
    */
   getAll: async ({ response }: { response: any }) => {
     try {
@@ -12,7 +20,7 @@ export default {
       response.status = 200;
       response.body = {
         success: true,
-        data,
+        data
       };
     } catch (error) {
       response.status = 400;
@@ -38,21 +46,20 @@ export default {
       return;
     }
 
-    /*const bidule = body
-    response.status = 200;
-    response.body = {
-        dump: bidule
-    };
-    return */
-
     try {
-      await BankAccountModel.add(
-        { todo: body.value.todo, isCompleted: false },
-      );
+
+      await BankAccountModel.add({
+        num_account: body.num_account,
+        firstname: body.firstname,
+        lastname: body.lastname,
+        balance: body.balance
+      });
+
       response.body = {
         success: true,
-        message: "The record was added successfully",
+        message: "The record was added successfully"
       };
+
     } catch (error) {
       response.status = 400;
       response.body = {
