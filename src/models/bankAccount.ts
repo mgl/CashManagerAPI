@@ -1,9 +1,7 @@
 import { db } from "../db/mongo.ts";
 import { BankAccount } from "../interfaces/bankAccount.ts";
 
-const collectionName: string = Deno.env.get("ACCOUNTS_COLLECTION_NAME")
-  ? Deno.env.get("ACCOUNTS_COLLECTION_NAME")!
-  : "bankAccounts";
+const collectionName: string = Deno.env.get("ACCOUNTS_COLLECTION_NAME") ? Deno.env.get("ACCOUNTS_COLLECTION_NAME")! : "bankAccounts";
 
 const bankAccounts = db.collection<BankAccount>(collectionName);
 
@@ -39,7 +37,7 @@ export default {
    */
   getAll: async () => {
     try {
-      const data = await bankAccounts.find();
+      const data = await bankAccounts.find().toArray();
       return data;
     } catch (error) {
       console.warn(error);
