@@ -69,7 +69,7 @@ export default {
     const bankAccountExists = await bankAccounts.findOne({ account_number: bankAccount.account_number });
 
     if (bankAccountExists) {
-      return bankAccountExists;
+      throw new Error("Account already exist");
     }
 
     const id = await bankAccounts.insertOne(bankAccount);

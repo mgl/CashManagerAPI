@@ -6,7 +6,7 @@ const router = new Router();
 router
   .get("/api/accounts", bankAccountController.getAll)
   .post("/api/accounts", bankAccountController.create)
-  .get("/api/accounts/:id", bankAccountController.getById)
+  .get("/api/accounts/:account_num", bankAccountController.getByAccountNum)
   .put("/api/accounts/:id", bankAccountController.updateById)
   .delete("/api/accounts/:id", bankAccountController.deleteById);
 
