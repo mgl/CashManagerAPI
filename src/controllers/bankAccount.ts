@@ -66,21 +66,19 @@ export default {
       response.status = 400;
       response.body = {
         success: false,
-        message: `Error: ${error}`,
+        message: `${error}`,
       };
     }
   },
 
   /**
    * @description Get bank account by id
-   * @route GET /accounts/:id
+   * @route GET /accounts/:account_num
    */
-  getById: async (
-    { params, response }: { params: { id: string }; response: any },
-  ) => {
+  getByAccountNum: async ({ params, response }: { params: { account_num: string }; response: any } ) => {
     try {
-      const isAvailable = await BankAccountModel.doesExistById(
-        { _id: Number(params.id) },
+      const isAvailable = await BankAccountModel.getByAccountNumber(
+        { account_num: Number(params.account_num) }
       );
 
       if (!isAvailable) {
