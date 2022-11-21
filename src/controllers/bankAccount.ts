@@ -36,7 +36,9 @@ export default {
    * @route POST /api/accounts
    */
   create: async ({ request, response }: { request: any; response: any }) => {
+
     const body = await request.body().value;
+    
     if (!request.hasBody) {
       response.status = 400;
       response.body = {
@@ -49,7 +51,7 @@ export default {
     try {
 
       await BankAccountModel.add({
-        num_account: body.num_account,
+        account_number: body.account_number,
         firstname: body.firstname,
         lastname: body.lastname,
         balance: body.balance
