@@ -4,6 +4,8 @@ EXPOSE 8080
 
 RUN apt-get update && apt-get install git -y
 
+USER deno
+
 WORKDIR /app
 
 COPY deps.ts .
