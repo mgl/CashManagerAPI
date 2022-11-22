@@ -1,0 +1,7 @@
+.github/
+.vscode/
+tests/
+.env
+docker-compose.yaml
+compose-dev.yaml
+README.md
