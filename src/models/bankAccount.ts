@@ -26,7 +26,7 @@ export default {
    * @example
    * await bankmodel.getById(123456789);
    */
-  getByAccountNumber: async (account_number: Number) => {
+  getByAccountNumber: async (account_number: number) => {
     return await bankAccounts.findOne({ account_number: account_number });
   },
 
@@ -90,7 +90,7 @@ export default {
    * @returns null if bank account does not exist
    * @returns null if bank account is not updated
    */
-  update: async (account_number: Number, body: []) => {
+  update: async (account_number: number, body: []) => {
     return await bankAccounts.updateOne({ account_number: account_number }, {
       $set: body,
     });
@@ -103,7 +103,7 @@ export default {
    *
    * @returns count of deleted bank accounts
    */
-   deleteByAccountNumber: async (account_number: Number) => {
+  deleteByAccountNumber: async (account_number: number) => {
     return await bankAccounts.deleteOne({ account_number: account_number });
   },
 };

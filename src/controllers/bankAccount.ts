@@ -1,3 +1,4 @@
+import { Request, Response } from "../../deps.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
@@ -5,7 +6,7 @@ export default {
    * @description Get all bank accounts
    * @route GET /api/accounts
    */
-  getAll: async ({ response }: { response: any }) => {
+  getAll: async ({ response }: { response: Response }) => {
     try {
       const data = await BankAccountModel.getAll();
       response.status = 200;
@@ -26,7 +27,9 @@ export default {
    * @description Add a new bank account
    * @route POST /api/accounts
    */
-  create: async ({ request, response }: { request: any; response: any }) => {
+  create: async (
+    { request, response }: { request: Request; response: Response },
+  ) => {
     const body = await request.body().value;
 
     if (!request.hasBody) {
@@ -64,11 +67,16 @@ export default {
    * @route GET /accounts/:account_num
    */
   getByAccountNum: async (
-    { params, response }: { params: { account_num: string }; response: any },
+    { params, response }: {
+      params: { account_num: string };
+      response: Response;
+    },
   ) => {
     try {
       const account_number: number = +params.account_num;
-      const isAvailable = await BankAccountModel.getByAccountNumber( account_number );
+      const isAvailable = await BankAccountModel.getByAccountNumber(
+        account_number,
+      );
 
       if (!isAvailable) {
         response.status = 404;
@@ -97,16 +105,18 @@ export default {
    * @description Update bank account by account number
    * @route PUT /accounts/:account_num
    */
-   updateByAccountNum: async (
+  updateByAccountNum: async (
     { params, request, response }: {
       params: { account_num: string };
-      request: any;
-      response: any;
+      request: Request;
+      response: Response;
     },
   ) => {
     try {
       const account_number: number = +params.account_num;
-      const isAvailable = await BankAccountModel.getByAccountNumber( account_number )
+      const isAvailable = await BankAccountModel.getByAccountNumber(
+        account_number,
+      );
       if (!isAvailable) {
         response.status = 404;
         response.body = {
@@ -136,10 +146,17 @@ export default {
    * @description Delete bank account by id
    * @route DELETE /accounts/:account_num
    */
-  deleteById: async ({ params, response }: { params: { account_num: string }; response: any }) => {
+  deleteById: async (
+    { params, response }: {
+      params: { account_num: string };
+      response: Response;
+    },
+  ) => {
     try {
       const account_number: number = +params.account_num;
-      const updatedRows = await BankAccountModel.deleteByAccountNumber(account_number);
+      const updatedRows = await BankAccountModel.deleteByAccountNumber(
+        account_number,
+      );
       response.status = 200;
       response.body = {
         success: true,
