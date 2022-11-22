@@ -45,3 +45,10 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the account to get
+
+  /api/transactions:
+    post: 
+      summary: create transaction
+      responses:
+        '201':
+          response: CREATED
