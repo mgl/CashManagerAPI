@@ -2,9 +2,16 @@ paths:
   /api/accounts:
     get:
       summary: Get all bank account
-  /api/accounts:
+      responses:
+        '200':
+          response: OK
+
     post:
       summary: create bank account
+      responses:
+        '201':
+          response: CREATED
+
   /api/accounts/:account_num:
     get:
       summary: Get a bank account by ID
@@ -15,7 +22,10 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the account to get
-  /api/accounts/:account_num:
+      responses:
+        '200':
+          response: OK
+
     put:
       summary: Update a bank account by ID
       parameters:
@@ -25,7 +35,7 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the account to get
-  /api/accounts/:account_num:
+
     delete:
       summary: Delete a bank account ID
       parameters:
