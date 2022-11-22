@@ -2,7 +2,7 @@ import { isHttpError, Response } from "../../deps.ts";
 
 const errorMiddleware = async (
   { response }: { response: Response },
-  next: Function,
+  next: () => Promise<void>,
 ) => {
   try {
     await next();
