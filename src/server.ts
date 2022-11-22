@@ -1,17 +1,12 @@
-import { Application, Router } from "../deps.ts";
+import { Application } from "../deps.ts";
 import Logger from "./middlewares/logger.ts";
 import ErrorMiddleware from "./middlewares/error.ts";
 import routerAccount from "./routes/bankAccount.ts";
+import routerTransaction from "./routes/transactions.ts";
 
-const router: Router = new Router();
 const port: number = Deno.env.get("PORT")
   ? parseInt(Deno.env.get("PORT")!)
   : 8080;
-
-router
-  .get("/", (context) => {
-    context.response.body = "CashManager API";
-  });
 
 const app = new Application();
 
@@ -20,8 +15,8 @@ app.use(Logger.responseTime);
 
 app.use(ErrorMiddleware);
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(routerTransaction.routes());
+app.use(routerTransaction.allowedMethods());
 
 app.use(routerAccount.routes());
 app.use(routerAccount.allowedMethods());

@@ -13,7 +13,7 @@ const User_Agent = "User-Agent";
 /** The standard logging function that processes and logs requests. */
 const logger = async (
   { response, request }: { response: Response; request: Request },
-  next: () => Promise<void>,
+  next: () => Promise<unknown>,
 ) => {
   await next();
   const responseTime = response.headers.get(X_RESPONSE_TIME);
@@ -38,7 +38,7 @@ const logger = async (
 /** Response time calculator that also adds response time header. */
 const responseTime = async (
   { response }: { response: Response },
-  next: () => Promise<void>,
+  next: () => Promise<unknown>,
 ) => {
   const start = Date.now();
   await next();
