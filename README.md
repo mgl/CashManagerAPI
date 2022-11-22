@@ -1,76 +1,30 @@
 # CashManagerAPI
 
-## Diagramme de séquence
+This is the API Backend of the Cash Manager project.
 
-```mermaid
-sequenceDiagram
-    participant A as Utilisateur
-    participant B as Application Client
-    participant C as Application TPE
-    participant D as Vendeur
-    participant E as Serveur Banque
+## Tech Stack
 
-    autonumber
+[Deno](https://deno.land) + [Oak](https://oakserver.github.io/oak) + [MongoDB](https://www.mongodb.com)
 
-    A->>B: Ouverture application
-    loop Achat
-        A->>B: Ajout d'un produit au panier
-    end
-    A->>B: Validation du panier
-    par Choix mode de paiement
-    A->>B: Sélection QR ou NFC
-    and
-    A->>D: Demande QR ou NFC
-    D->>C: Sélection QR ou NFC
-    end
-    alt QR sélectionné
-        C->>B: Scan du QR code
-    else NFC sélectionné
-        B->C: Approcher le téléphone
-    end
-    C->>E: Demande de paiement
-    loop Paiement
-        alt Transaction acceptée
-            E-->>C: Paiement accepté
-        else Transaction rejetée
-            E-->>C: Paiement refusé
-        end
-    end
-```
+## Get started
 
-## Diagramme de classe
+### Using [Docker Dev](https://docs.docker.com/desktop/dev-environments)
 
-```mermaid
-classDiagram
-    class BankAccount{
-        +String _id
-        +String num_account
-        +String lastname
-        +String firstname
-        +int balance
-        +add()
-        +getCount()
-        +getAll()
-        +getById()
-        +update()
-        +deleteById()
-    }
+Clone and open the Deno container:
 
-    class Transaction{
-        +String _id
-        +Date date
-        +String description
-        +int amount
-        +BankAccount from
-        +BankAccount to
+<img src="docs/clone.png" alt="drawing" width="400"/>
+<img src="docs/open.png" alt="drawing" width="400"/>
 
-        +add()
-        +getCount()
-        +getAll()
-        +getById()
-        +update()
-        +deleteById()
-    }
+Run the project:
+> deno run --allow-net --allow-env --watch src/server.ts
 
-    Transaction "*" --> "1" BankAccount
-```
+### Error when using Git
+
+Sometimes there is an error with Git regarding the repository ownership:
+
+> fatal: detected dubious ownership in repository at '/com.docker.devenvironments.code'
+
+To fix it:
+> git config --global --add safe.directory /com.docker.devenvironments.code
+
+## [Technical Docs](/docs)
