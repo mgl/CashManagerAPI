@@ -8,6 +8,6 @@ router
   .post("/api/accounts", bankAccountController.create)
   .get("/api/accounts/:account_num", bankAccountController.getByAccountNum)
   .put("/api/accounts/:account_num", bankAccountController.updateByAccountNum)
-  .delete("/api/accounts/:id", bankAccountController.deleteById);
+  .delete("/api/accounts/:account_num", bankAccountController.deleteById);
 
 export default router;

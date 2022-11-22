@@ -1,13 +1,4 @@
-import { BankAccount } from "../interfaces/bankAccount.ts";
 import BankAccountModel from "../models/bankAccount.ts";
-
-// Pour debug :
-/*const bidule = body
-    response.status = 200;
-    response.body = {
-        dump: bidule
-    };
-    return */
 
 export default {
   /**
@@ -103,7 +94,7 @@ export default {
   },
 
   /**
-   * @description Update bank account by id
+   * @description Update bank account by account number
    * @route PUT /accounts/:account_num
    */
    updateByAccountNum: async (
@@ -125,7 +116,6 @@ export default {
         return;
       }
 
-      // if todo found then update todo
       const body = await request.body().value;
       const updatedRows = await BankAccountModel.update(account_number, body);
       response.status = 200;
@@ -144,15 +134,12 @@ export default {
 
   /**
    * @description Delete bank account by id
-   * @route DELETE /accounts/:id
+   * @route DELETE /accounts/:account_num
    */
-  deleteById: async (
-    { params, response }: { params: { id: string }; response: any },
-  ) => {
+  deleteById: async ({ params, response }: { params: { account_num: string }; response: any }) => {
     try {
-      const updatedRows = await BankAccountModel.deleteById({
-        id: Number(params.id),
-      });
+      const account_number: number = +params.account_num;
+      const updatedRows = await BankAccountModel.deleteByAccountNumber(account_number);
       response.status = 200;
       response.body = {
         success: true,
@@ -162,7 +149,7 @@ export default {
       response.status = 400;
       response.body = {
         success: false,
-        message: `Error: ${error}`,
+        message: `${error}`,
       };
     }
   },

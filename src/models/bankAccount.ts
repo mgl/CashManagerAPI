@@ -91,23 +91,19 @@ export default {
    * @returns null if bank account is not updated
    */
   update: async (account_number: Number, body: []) => {
-    console.log(account_number);
-    console.log(body);
     return await bankAccounts.updateOne({ account_number: account_number }, {
       $set: body,
     });
   },
 
   /**
-   * @description Deletes a bank account by ID
+   * @description Deletes a bank account by account number
    *
-   * @param id account to delete
+   * @param account number to delete
    *
    * @returns count of deleted bank accounts
    */
-  deleteById: async ({ _id }: BankAccount) => {
-    return await bankAccounts.deleteOne({
-      _id: _id,
-    });
+   deleteByAccountNumber: async (account_number: Number) => {
+    return await bankAccounts.deleteOne({ account_number: account_number });
   },
 };
