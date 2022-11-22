@@ -1,0 +1,37 @@
+paths: 
+  /api/accounts:
+    get:
+      summary: Get all bank account
+  /api/accounts:
+    post:
+      summary: create bank account
+  /api/accounts/:account_num:
+    get:
+      summary: Get a bank account by ID
+      parameters:
+        - in: path
+          name: account_num
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the account to get
+  /api/accounts/:account_num:
+    put:
+      summary: Update a bank account by ID
+      parameters:
+        - in: path
+          name: account_num
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the account to get
+  /api/accounts/:account_num:
+    delete:
+      summary: Delete a bank account ID
+      parameters:
+        - in: path
+          name: account_num
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the account to get
