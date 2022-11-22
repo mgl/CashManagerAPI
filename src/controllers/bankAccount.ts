@@ -78,7 +78,7 @@ export default {
     try {
       console.log(params.account_num);
       const isAvailable = await BankAccountModel.getByAccountNumber(
-        { accountNumber: Number(params.account_num) }
+        { accountNumber: Number(params.account_num) },
       );
 
       if (!isAvailable) {
