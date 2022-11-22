@@ -26,8 +26,8 @@ export default {
    * @example
    * await bankmodel.getById(123456789);
    */
-  getByAccountNumber: async (accountNumber: number) => {
-    return await bankAccounts.findOne({ accountNumber: accountNumber });
+  getByAccountNumber: async (account_number: Number) => {
+    return await bankAccounts.findOne({ account_number: account_number });
   },
 
   /**
@@ -90,9 +90,11 @@ export default {
    * @returns null if bank account does not exist
    * @returns null if bank account is not updated
    */
-  update: async (bankAccount: BankAccount) => {
-    return await bankAccounts.updateOne({ _id: bankAccount._id }, {
-      $set: bankAccount,
+  update: async (account_number: Number, body: []) => {
+    console.log(account_number);
+    console.log(body);
+    return await bankAccounts.updateOne({ account_number: account_number }, {
+      $set: body,
     });
   },
 

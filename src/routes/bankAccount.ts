@@ -7,7 +7,7 @@ router
   .get("/api/accounts", bankAccountController.getAll)
   .post("/api/accounts", bankAccountController.create)
   .get("/api/accounts/:account_num", bankAccountController.getByAccountNum)
-  .put("/api/accounts/:id", bankAccountController.updateById)
+  .put("/api/accounts/:account_num", bankAccountController.updateByAccountNum)
   .delete("/api/accounts/:id", bankAccountController.deleteById);
 
 export default router;

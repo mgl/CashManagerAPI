@@ -76,27 +76,22 @@ export default {
     { params, response }: { params: { account_num: string }; response: any },
   ) => {
     try {
-      console.log(params.account_num);
-      const isAvailable = await BankAccountModel.getByAccountNumber(
-        { accountNumber: Number(params.account_num) }
-      );
+      const account_number: number = +params.account_num;
+      const isAvailable = await BankAccountModel.getByAccountNumber( account_number );
 
       if (!isAvailable) {
         response.status = 404;
         response.body = {
           success: false,
-          message: "No todo found",
+          message: "No account found",
         };
         return;
       }
 
-      const todo: BankAccount = await BankAccountModel.getById({
-        id: Number(params.id),
-      });
       response.status = 200;
       response.body = {
         success: true,
-        data: todo,
+        data: isAvailable,
       };
     } catch (error) {
       response.status = 400;
@@ -109,34 +104,30 @@ export default {
 
   /**
    * @description Update bank account by id
-   * @route PUT /accounts/:id
+   * @route PUT /accounts/:account_num
    */
-  updateById: async (
+   updateByAccountNum: async (
     { params, request, response }: {
-      params: { id: string };
+      params: { account_num: string };
       request: any;
       response: any;
     },
   ) => {
     try {
-      const isAvailable = await BankAccountModel.doesExistById(
-        { id: Number(params.id) },
-      );
+      const account_number: number = +params.account_num;
+      const isAvailable = await BankAccountModel.getByAccountNumber( account_number )
       if (!isAvailable) {
         response.status = 404;
         response.body = {
           success: false,
-          message: "No todo found",
+          message: "No account found",
         };
         return;
       }
 
       // if todo found then update todo
-      const body = await request.body();
-      const updatedRows = await BankAccountModel.updateById({
-        id: Number(params.id),
-        ...body.value,
-      });
+      const body = await request.body().value;
+      const updatedRows = await BankAccountModel.update(account_number, body);
       response.status = 200;
       response.body = {
         success: true,
