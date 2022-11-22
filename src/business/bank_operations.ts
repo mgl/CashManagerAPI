@@ -19,49 +19,51 @@ import transactionModel from "../models/transaction.ts";
  * @example
  * await bankOperations.transfer("123456789", "987654321", 100);
  */
-export const transfer = async (
-  fromAccountNumber: number,
-  toAccountNumber: number,
-  amount: number,
-) => {
-  if (fromAccountNumber === toAccountNumber) {
-    throw new Error("Cannot transfer to the same account");
-  }
+export default {
+  async transfer(
+    fromAccountNumber: number,
+    toAccountNumber: number,
+    amount: number,
+  ) {
+    if (fromAccountNumber === toAccountNumber) {
+      throw new Error("Cannot transfer to the same account");
+    }
 
-  if (amount < 0) {
-    throw new Error("Cannot transfer a negative amount");
-  }
+    if (amount < 0) {
+      throw new Error("Cannot transfer a negative amount");
+    }
 
-  if (isNaN(amount)) {
-    throw new Error("Amount must be a number");
-  }
+    if (isNaN(amount)) {
+      throw new Error("Amount must be a number");
+    }
 
-  const fromAccount = await bankModel.getByAccountNumber(fromAccountNumber);
-  const toAccount = await bankModel.getByAccountNumber(toAccountNumber);
+    const fromAccount = await bankModel.getByAccountNumber(fromAccountNumber);
+    const toAccount = await bankModel.getByAccountNumber(toAccountNumber);
 
-  if (!fromAccount) {
-    throw new Error("From account not found");
-  }
+    if (!fromAccount) {
+      throw new Error("From account not found");
+    }
 
-  if (!toAccount) {
-    throw new Error("To account not found");
-  }
+    if (!toAccount) {
+      throw new Error("To account not found");
+    }
 
-  if (fromAccount.balance < amount) {
-    throw new Error("Insufficient funds");
-  }
+    if (fromAccount.balance < amount) {
+      throw new Error("Insufficient funds");
+    }
 
-  fromAccount.balance -= amount;
-  toAccount.balance += amount;
+    fromAccount.balance -= amount;
+    toAccount.balance += amount;
 
-  // Logs the transaction in the database
-  await transactionModel.add({
-    date: new Date(),
-    amount: amount,
-    from: fromAccount,
-    to: toAccount,
-  });
+    // Logs the transaction in the database
+    await transactionModel.add({
+      date: new Date(),
+      amount: amount,
+      from: fromAccount,
+      to: toAccount,
+    });
 
-  await bankModel.update(fromAccount);
-  await bankModel.update(toAccount);
+    await bankModel.update(fromAccount);
+    await bankModel.update(toAccount);
+  },
 };
