@@ -4,10 +4,6 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: .
-    environment:
-      - PORT=8080
-      - DB_URI=mongodb://root:root@mongo:27017/
-      - DB=cashmanager
     depends_on:
       - mongo
     expose:
