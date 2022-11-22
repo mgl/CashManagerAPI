@@ -2,6 +2,10 @@
 
 This is the API Backend of the Cash Manager project.
 
+## Technical Docs
+
+[Documentation](/docs)
+
 ## Tech Stack
 
 [Deno](https://deno.land) + [Oak](https://oakserver.github.io/oak) +
@@ -33,5 +37,3 @@ Sometimes there is an error with Git regarding the repository ownership:
 To fix it:
 
 > git config --global --add safe.directory /com.docker.devenvironments.code
-
-## [Technical Docs](/docs)
