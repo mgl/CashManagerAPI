@@ -127,7 +127,9 @@ export default {
       }
 
       const body = await request.body().value;
-      const updatedRows = await BankAccountModel.update(account_number, body);
+      const updatedRows =
+        await (await BankAccountModel.update(account_number, body))
+          .modifiedCount;
       response.status = 200;
       response.body = {
         success: true,
