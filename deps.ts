@@ -7,6 +7,7 @@ import "https://deno.land/std@0.166.0/dotenv/load.ts";
 export { Bson, MongoClient } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
 export {
   Application,
+  Context,
   isHttpError,
   Router,
   Status,
@@ -23,3 +24,5 @@ export { Request } from "https://deno.land/x/oak@v11.1.0/request.ts";
 export { Response } from "https://deno.land/x/oak@v11.1.0/response.ts";
 export * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 export * as djwt from "https://deno.land/x/djwt@v2.8/mod.ts";
+export { create } from "https://deno.land/x/djwt@v2.8/mod.ts";
+export type { Payload } from "https://deno.land/x/djwt@v2.8/mod.ts";
