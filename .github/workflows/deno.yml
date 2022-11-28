@@ -28,5 +28,8 @@ jobs:
       - name: Run linter
         run: deno lint
 
+      - name: Run Server
+        run: deno run --allow-net --allow-read --allow-env src/server.ts
+
       - name: Run tests
-        run: deno test -A
+        run: deno test --allow-net 
