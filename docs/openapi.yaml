@@ -11,6 +11,13 @@ paths:
       responses:
         '201':
           response: CREATED
+    post:
+      summary: log in bank account
+      responses:
+        '200':
+          response: OK
+        '401':
+          response: Unauthorized
 
   /api/accounts/:account_num:
     get:
@@ -54,4 +61,4 @@ paths:
       summary: create transaction
       responses:
         '201':
-          response: CREATED
+          response: CREATED  
