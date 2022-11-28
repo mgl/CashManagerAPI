@@ -96,6 +96,34 @@ export default {
   },
 
   /**
+   * @description Update a bank account
+   *
+   * @param bankAccount: BankAccount object to update
+   *
+   * @returns updated bank account
+   * @returns null if bank account does not exist
+   * @returns null if bank account is not updated
+   * @returns null if error
+   *
+   * @example
+   * await bankModel.update({ _id: "123456789", balance: 1000 });
+   */
+  updateById: async (bankAccount: BankAccount) => {
+    try {
+      const { _id, ...body } = bankAccount;
+      const updatedBankAccount = await bankAccounts.updateOne(
+        { _id: _id },
+        { $set: body },
+        { upsert: true }, // upsert: true will insert the document if it doesn't exist
+      );
+      return updatedBankAccount;
+    } catch (error) {
+      console.warn(error);
+      return null;
+    }
+  },
+
+  /**
    * @description Deletes a bank account by account number
    *
    * @param account number to delete

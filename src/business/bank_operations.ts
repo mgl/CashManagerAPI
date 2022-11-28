@@ -63,15 +63,20 @@ export default {
     fromAccount.balance -= amount;
     toAccount.balance += amount;
 
+    if (!await bankModel.updateById(fromAccount)) {
+      throw new Error("Failed to update from account");
+    }
+
+    if (!await bankModel.updateById(toAccount)) {
+      throw new Error("Failed to update to account");
+    }
+
     // Logs the transaction in the database
-    await transactionModel.add({
+    const transaction = await transactionModel.add({
       date: new Date(),
       amount: amount,
       fromAccountNumber: fromAccount,
       toAccountNumber: toAccount,
     });
-
-    await bankModel.update(fromAccount);
-    await bankModel.update(toAccount);
   },
 };
