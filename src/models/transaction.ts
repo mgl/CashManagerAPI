@@ -14,18 +14,12 @@ export default {
    *
    * @returns object of transaction item
    * @returns null if transaction is not added
+   *
+   * @example await transactionModel.add({ fromAccountNumber: 123456789, toAccountNumber: 987654321, amount: 100 });
    */
   add: async (transaction: Transaction) => {
-    const { _id } = transaction;
-    const transactionExists = await transactions.findOne({ _id: _id });
-
-    if (transactionExists) {
-      return null;
-    }
-
-    const id = await transactions.insertOne(transaction);
-    transaction._id = id;
-    return transaction;
+    const { $oid } = await transactions.insertOne(transaction);
+    return await transactions.findOne({ _id: { $oid } });
   },
 
   /**
