@@ -27,6 +27,14 @@ jobs:
 
       - name: Run linter
         run: deno lint
+      
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: latest
+
+      - name: Test Mongo Connection
+        run: "sudo mongo localhost:27017"
 
       - name: Run Server
         run: deno run --allow-net --allow-read --allow-env src/server.ts
