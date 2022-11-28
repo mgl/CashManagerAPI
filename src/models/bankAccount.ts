@@ -18,7 +18,7 @@ export default {
   /**
    * @description Get bank account by account number
    *
-   * @param {number} accountNumber
+   * @param {number} account_number
    * @returns bank account
    *
    * @example

@@ -2,7 +2,7 @@ import { MongoClient } from "../../deps.ts";
 import { DB_NAME, URI } from "../config.ts";
 
 class DB {
-  client: MongoClient;
+  public client: MongoClient;
   uri: string;
   dbName: string;
 
@@ -12,9 +12,10 @@ class DB {
     this.uri = uri;
   }
 
-  connect() {
-    this.client = new MongoClient();
-    this.client.connect(URI);
+  async connect() {
+    const client = new MongoClient();
+    await client.connect(this.uri);
+    this.client = client;
   }
 
   get getDb() {
@@ -22,7 +23,7 @@ class DB {
   }
 }
 
-const db = new DB(DB_NAME, URI);
-db.connect();
+const db = new DB(DB_NAME,URI);
+await db.connect();
 
 export default db;
