@@ -5,6 +5,6 @@ export interface Transaction {
   _id?: Bson.ObjectId;
   date: Date;
   amount: number;
-  from: BankAccount;
-  to: BankAccount;
+  fromAccountNumber: BankAccount;
+  toAccountNumber: BankAccount;
 }
