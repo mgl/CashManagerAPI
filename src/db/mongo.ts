@@ -1,12 +1,8 @@
 import { MongoClient } from "../../deps.ts";
 
-const URI: string = Deno.env.get("DB_URI")
-  ? Deno.env.get("DB_URI")!
-  : "mongodb://localhost:27017";
+const URI: string = Deno.env.get("DB_URI") || "mongodb://root:root@mongo:27017";
 
-const database = Deno.env.get("DB_NAME")
-  ? Deno.env.get("DB_NAME")!
-  : "cashmanager";
+const database: string = Deno.env.get("DB_NAME") || "cashmanager";
 
 const mongoClient: MongoClient = new MongoClient();
 try {

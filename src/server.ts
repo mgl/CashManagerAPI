@@ -4,9 +4,7 @@ import ErrorMiddleware from "./middlewares/error.ts";
 import routerAccount from "./routes/bankAccount.ts";
 import routerTransaction from "./routes/transactions.ts";
 
-const port: number = Deno.env.get("PORT")
-  ? parseInt(Deno.env.get("PORT")!)
-  : 8080;
+const port: number = Number(Deno.env.get("PORT")) || 8080;
 
 const app = new Application();
 

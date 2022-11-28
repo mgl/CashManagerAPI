@@ -1,16 +1,11 @@
-FROM lukechannings/deno:latest
+FROM denoland/deno
 
-EXPOSE 8080
-
-RUN apt-get update && apt-get install git -y
+EXPOSE 80
 
 WORKDIR /app
 
-COPY deps.ts .
-RUN deno cache deps.ts
-
-ADD . .
+ADD . /app
 
 RUN deno cache src/server.ts
 
-CMD ["run", "--allow-net", "--watch", "src/server.ts"]
+CMD ["run", "--allow-net", "--allow-env", "src/server.ts"]

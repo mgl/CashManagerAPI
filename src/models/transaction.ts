@@ -1,9 +1,8 @@
 import { db } from "../db/mongo.ts";
 import { Transaction } from "../interfaces/transaction.ts";
 
-const collectionName = Deno.env.get("TRANSACTIONS_COLLECTION_NAME")
-  ? Deno.env.get("TRANSACTIONS_COLLECTION_NAME")!
-  : "transactions";
+const collectionName: string = Deno.env.get("TRANSACTIONS_COLLECTION_NAME") ||
+  "transactions";
 
 const transactions = db.collection<Transaction>(collectionName);
 
