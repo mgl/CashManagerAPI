@@ -1,10 +1,8 @@
 import { db } from "../db/mongo.ts";
 import { Transaction } from "../interfaces/transaction.ts";
+import { TRANSACTIONS_COLLECTION_NAME } from "../config.ts";
 
-const collectionName: string = Deno.env.get("TRANSACTIONS_COLLECTION_NAME") ||
-  "transactions";
-
-const transactions = db.collection<Transaction>(collectionName);
+const transactions = db.collection<Transaction>(TRANSACTIONS_COLLECTION_NAME);
 
 export default {
   /**

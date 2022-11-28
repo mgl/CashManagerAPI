@@ -1,8 +1,5 @@
 import { MongoClient } from "../../deps.ts";
-
-const URI: string = Deno.env.get("DB_URI") || "mongodb://root:root@mongo:27017";
-
-const database: string = Deno.env.get("DB_NAME") || "cashmanager";
+import { DB_NAME, URI } from "../config.ts";
 
 const mongoClient: MongoClient = new MongoClient();
 try {
@@ -13,6 +10,6 @@ try {
   Deno.exit(1);
 }
 
-const db = mongoClient.database(database);
+const db = mongoClient.database(DB_NAME);
 
 export { db };
