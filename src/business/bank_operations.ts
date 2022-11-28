@@ -72,7 +72,7 @@ export default {
     }
 
     // Logs the transaction in the database
-    const transaction = await transactionModel.add({
+    await transactionModel.add({
       date: new Date(),
       amount: amount,
       fromAccountNumber: fromAccount,

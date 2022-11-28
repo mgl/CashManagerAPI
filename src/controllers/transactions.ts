@@ -3,6 +3,17 @@ import BankOperations from "../business/bank_operations.ts";
 
 export default {
   /**
+   * @description Get all transactions
+   *
+   * @route GET /api/transactions
+   *
+   * @param {Request} request
+   * @param {Response} response
+   *
+   * @returns {Promise<void>}
+   */
+
+  /**
    * @description Initiates a new transactions between two accounts
    * @route POST /api/transactions
    */
