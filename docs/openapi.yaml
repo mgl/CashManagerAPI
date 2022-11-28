@@ -45,6 +45,9 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the account to get
+      responses:
+        '200':
+          response: OK
 
   /api/transactions:
     post: 
