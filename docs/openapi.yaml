@@ -11,6 +11,8 @@ paths:
       responses:
         '201':
           response: CREATED
+        '403'
+          response: Forbidden
     post:
       summary: log in bank account
       responses:
@@ -32,6 +34,8 @@ paths:
       responses:
         '200':
           response: OK
+        '404':
+          response: Not Found
 
     put:
       summary: Update a bank account by ID
@@ -42,6 +46,11 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the account to get
+      responses:
+        '200':
+          response: OK
+        '404':
+          response: Not Found
 
     delete:
       summary: Delete a bank account ID
@@ -55,7 +64,8 @@ paths:
       responses:
         '200':
           response: OK
-
+        '404':
+          response: Not Found
   /api/transactions:
     post: 
       summary: create transaction
