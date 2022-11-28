@@ -1,8 +1,9 @@
-import { db } from "../db/mongo.ts";
+import db from "../db/mongo.ts";
 import { BankAccount } from "../interfaces/bankAccount.ts";
 import { ACCOUNTS_COLLECTION_NAME } from "../config.ts";
 
-const bankAccounts = db.collection<BankAccount>(ACCOUNTS_COLLECTION_NAME);
+const database = db.getDb;
+const bankAccounts = database.collection<BankAccount>(ACCOUNTS_COLLECTION_NAME);
 
 export default {
   /**
