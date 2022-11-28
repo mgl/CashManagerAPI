@@ -33,6 +33,9 @@ jobs:
         with:
           mongodb-version: latest
 
+      - name: Test Mongo Connection
+        run: "sudo mongo localhost:27017"
+
       - name: Run Server
         run: deno run --allow-net --allow-read --allow-env src/server.ts
 
