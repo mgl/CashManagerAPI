@@ -23,7 +23,7 @@ class DB {
   }
 }
 
-const db = new DB(DB_NAME,URI);
+const db = new DB(DB_NAME, URI);
 await db.connect();
 
 export default db;
