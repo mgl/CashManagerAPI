@@ -1,6 +1,24 @@
 import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
+//import bankAccountController from "../src/controllers/bankAccount.ts"
 
 const baseUrl = "http://localhost:8080";
+
+/*
+Deno.test("Get Account", async () => {
+  const headers = {
+    "content-type": "text/plain;charset=UTF-8"
+  };
+  const request = new Request(`${baseUrl}/api/accounts`, {
+    method: "GET",
+    headers
+  });
+
+  const res = await bankAccountController.getAll(request);
+  const resBody = await res.json();
+
+  assertEquals(res.status, 400);
+  assertEquals(resBody.success, true);
+});*/
 
 Deno.test("Create Account", async () => {
   const body = {
