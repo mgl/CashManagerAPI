@@ -32,6 +32,8 @@ jobs:
         uses: supercharge/mongodb-github-action@1.8.0
         with:
           mongodb-version: 6.0
+          
+      - name: 
         run: deno run --allow-net --allow-read --allow-env src/server.ts
 
       - name: Run tests
