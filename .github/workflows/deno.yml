@@ -22,11 +22,16 @@ jobs:
       mongodb:
         image: mongo
         env:
-          MONGO_INITDB_ROOT_USERNAME: ${APP_MONGO_USER}
-          MONGO_INITDB_ROOT_PASSWORD: ${APP_MONGO_PASS}
-          MONGO_INITDB_DATABASE: ${APP_MONGO_DB}
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: root
+          MONGO_INITDB_DATABASE: cashmanager
+        options: >-
+          --health-cmd mongo
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
-        - 27017:27017
+          - 27017:27017
 
     steps:
       - name: Setup repo
@@ -44,7 +49,7 @@ jobs:
       ##  run: deno lint
 
       - name: Check Mongo is Up
-        run: curl 0.0.0.0:27017
+        run: curl mongo:27017
 
       - name: Run server
         run: deno run --allow-net --allow-read --allow-env src/server.ts
