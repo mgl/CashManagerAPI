@@ -1,10 +1,9 @@
-import { db } from "../db/mongo.ts";
+import db from "../db/mongo.ts";
 import { BankAccount } from "../interfaces/bankAccount.ts";
+import { ACCOUNTS_COLLECTION_NAME } from "../config.ts";
 
-const collectionName: string = Deno.env.get("ACCOUNTS_COLLECTION_NAME") ||
-  "bankAccounts";
-
-const bankAccounts = db.collection<BankAccount>(collectionName);
+const database = db.getDb;
+const bankAccounts = database.collection<BankAccount>(ACCOUNTS_COLLECTION_NAME);
 
 export default {
   /**
@@ -19,7 +18,7 @@ export default {
   /**
    * @description Get bank account by account number
    *
-   * @param {number} accountNumber
+   * @param {number} account_number
    * @returns bank account
    *
    * @example

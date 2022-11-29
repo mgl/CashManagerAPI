@@ -1,4 +1,5 @@
-import { Request, Response } from "../../deps.ts";
+import { Request, Response, Context } from "../../deps.ts";
+import { create, Payload } from "../../deps.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
@@ -171,5 +172,21 @@ export default {
         message: `${error}`,
       };
     }
+  },
+
+  login: async ({ request, response }: Context) => {
+    const body = ((await request.body()).value);
+    const payload: Payload = {
+      iss: `${body.username} ${body.password}`,
+      exp: djwt.setExpiration(new Date().getTime() + 60 * 60 * 1000),
+    };
+    const header: Jose = {
+      alg: "HS512",
+      typ: "JWT",
+    };
+
+    const token = makeJwt({ header, payload, key: JWT_KEY });
+    response.status = 200;
+    response.body = { token };
   },
 };

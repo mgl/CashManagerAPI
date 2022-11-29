@@ -3,8 +3,7 @@ import Logger from "./middlewares/logger.ts";
 import ErrorMiddleware from "./middlewares/error.ts";
 import routerAccount from "./routes/bankAccount.ts";
 import routerTransaction from "./routes/transactions.ts";
-
-const port: number = Number(Deno.env.get("PORT")) || 8080;
+import { PORT as port } from "./config.ts";
 
 const app = new Application();
 

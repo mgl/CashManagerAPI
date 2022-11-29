@@ -1,54 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Cash Manager
+  description: This is the API Backend of the Cash Manager project.
+
 paths: 
   /api/accounts:
     get:
       summary: Get all bank account
+      description: Show all bank account
       responses:
         '200':
-          response: OK
+          description: "OK"
+        '400':
+          description: "Bad Request"
 
     post:
       summary: create bank account
+      description: 
       responses:
-        '201':
-          response: CREATED
+        "201":
+          description: "The record was added successfully"
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account_number:
+                  type: number
+                firstname:
+                  type: string
+                lastname:
+                  type: string
+                balance:
+                  type: number
+        "400"
+          description: "No data provided"
+        content:
+          text/html:
+    post:
+      summary: log in bank account
+      description: 
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          description: "Unauthorized"
+        content:
+          text/html:
 
-  /api/accounts/:account_num:
+  /api/accounts/{account_num}:
     get:
       summary: Get a bank account by ID
+      description: Numeric ID of the account to get 
       parameters:
-        - in: path
-          name: account_num
+        - name: account_num
+          in: path
           schema:
             type: integer
           required: true
-          description: Numeric ID of the account to get
       responses:
-        '200':
-          response: OK
+        "200":
+          description: "OK"
+        "404":
+          description: "Not Found"
+        content:
+          text/html:
 
     put:
       summary: Update a bank account by ID
+      description: Numeric ID of the account to get 
       parameters:
-        - in: path
-          name: account_num
+        - name: account_num
+          in: path
           schema:
             type: integer
           required: true
-          description: Numeric ID of the account to get
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "Not Found"
+        content:
+          text/html:
 
     delete:
       summary: Delete a bank account ID
+      description: Numeric ID of the account to get 
       parameters:
-        - in: path
-          name: account_num
+        - name: account_num
+          in: path
           schema:
             type: integer
           required: true
-          description: Numeric ID of the account to get
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+        content:
+          text/html:
 
   /api/transactions:
     post: 
       summary: create transaction
+      description: 
       responses:
-        '201':
-          response: CREATED
+        "200":
+          description: "Transaction successful"
+        "400":
+          description: "Bad Request"
+        content:
+          text/html:

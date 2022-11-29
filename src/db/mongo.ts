@@ -1,18 +1,29 @@
 import { MongoClient } from "../../deps.ts";
+import { DB_NAME, URI } from "../config.ts";
 
-const URI: string = Deno.env.get("DB_URI") || "mongodb://root:root@mongo:27017";
+class DB {
+  public client: MongoClient;
+  uri: string;
+  dbName: string;
 
-const database: string = Deno.env.get("DB_NAME") || "cashmanager";
+  constructor(dbName: string, uri: string) {
+    this.client = {} as MongoClient;
+    this.dbName = dbName;
+    this.uri = uri;
+  }
 
-const mongoClient: MongoClient = new MongoClient();
-try {
-  await mongoClient.connect(URI);
-  console.log("Database successfully connected");
-} catch (err) {
-  console.error("Exiting because database connection failed: ", err);
-  Deno.exit(1);
+  async connect() {
+    const client = new MongoClient();
+    await client.connect(this.uri);
+    this.client = client;
+  }
+
+  get getDb() {
+    return this.client.database(this.dbName);
+  }
 }
 
-const db = mongoClient.database(database);
+const db = new DB(DB_NAME,URI);
+await db.connect();
 
-export { db };
+export default db;
