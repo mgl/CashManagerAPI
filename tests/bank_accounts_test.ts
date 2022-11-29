@@ -3,6 +3,7 @@ import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
 const baseUrl = "http://localhost:8080";
 
 Deno.test("Create Account", async () => {
+ 
   const body = {
     "account_number": 12966372819,
     "firstname": "Ichigo",
