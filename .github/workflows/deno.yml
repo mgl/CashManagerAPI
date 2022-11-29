@@ -44,7 +44,7 @@ jobs:
       ##  run: deno lint
 
       - name: Check Mongo is Up
-        run: curl 0.0.0.0:27017
+        run: curl mongodb:27017
 
       - name: Run server
         run: deno run --allow-net --allow-read --allow-env src/server.ts
