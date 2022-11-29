@@ -23,7 +23,6 @@ export {
 export { format } from "https://deno.land/std@0.166.0/datetime/mod.ts";
 export { Request } from "https://deno.land/x/oak@v11.1.0/request.ts";
 export { Response } from "https://deno.land/x/oak@v11.1.0/response.ts";
-export * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 export {
   create,
   decode,
@@ -31,3 +30,4 @@ export {
   verify,
 } from "https://deno.land/x/djwt@v2.8/mod.ts";
 export type { Header, Payload } from "https://deno.land/x/djwt@v2.8/mod.ts";
+export * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
