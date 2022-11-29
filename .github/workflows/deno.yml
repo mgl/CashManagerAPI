@@ -14,12 +14,10 @@ env:
   APP_MONGO_PASS: root
   APP_MONGO_DB: cashmanager
 
-
-
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     services:
       mongodb:
         image: mongo
@@ -45,8 +43,11 @@ jobs:
       #- name: Run linter
       ##  run: deno lint
 
-      - name: 
+      - name: Check Mongo is Up
+        run: curl http://localhost:27017
+
+      - name: Run server
         run: deno run --allow-net --allow-read --allow-env src/server.ts
 
       - name: Run tests
-        run: deno test --allow-net 
+        run: deno test --allow-net
