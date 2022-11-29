@@ -132,4 +132,30 @@ export default {
   deleteByAccountNumber: async (account_number: number) => {
     return await bankAccounts.deleteOne({ account_number: account_number });
   },
+
+  /**
+   * @description Login a bank account
+   *
+   * @param account number
+   * @param password
+   *
+   * @returns JWT token
+   *
+   * @example await bankModel.login(123456789, "password");
+   */
+  login: async (account_number: number, password: string) => {
+    const bankAccount = await bankAccounts.findOne(
+      { account_number: account_number },
+    );
+
+    if (!bankAccount) {
+      throw new Error("Account does not exist");
+    }
+
+    if (bankAccount.password !== password) {
+      throw new Error("Invalid password");
+    }
+
+    return await bankAccount;
+  },
 };
