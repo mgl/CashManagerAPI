@@ -1,5 +1,4 @@
-import { Context, Request, Response } from "../../deps.ts";
-import { Payload } from "../../deps.ts";
+import { Context, Payload, Request, Response } from "../../deps.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
