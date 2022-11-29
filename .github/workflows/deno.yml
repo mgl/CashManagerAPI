@@ -9,9 +9,26 @@ on:
 permissions:
   contents: read
 
+env:
+  APP_MONGO_USER: root
+  APP_MONGO_PASS: root
+  APP_MONGO_DB: cashmanager
+
+
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: ${APP_MONGO_USER}
+          MONGO_INITDB_ROOT_PASSWORD: ${APP_MONGO_PASS}
+          MONGO_INITDB_DATABASE: ${APP_MONGO_DB}
+        ports:
+        - 27017:27017
 
     steps:
       - name: Setup repo
@@ -28,11 +45,6 @@ jobs:
       #- name: Run linter
       ##  run: deno lint
 
-      - name: Start MongoDB and Server
-        uses: supercharge/mongodb-github-action@1.8.0
-        with:
-          mongodb-version: 6.0
-          
       - name: 
         run: deno run --allow-net --allow-read --allow-env src/server.ts
 
