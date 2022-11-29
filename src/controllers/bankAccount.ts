@@ -1,5 +1,5 @@
-import { Request, Response, Context } from "../../deps.ts";
-import { create, Payload } from "../../deps.ts";
+import { Context, Request, Response } from "../../deps.ts";
+import { Payload } from "../../deps.ts";
 import BankAccountModel from "../models/bankAccount.ts";
 
 export default {
@@ -128,9 +128,8 @@ export default {
       }
 
       const body = await request.body().value;
-      const updatedRows =
-        await (await BankAccountModel.update(account_number, body))
-          .modifiedCount;
+      const updatedRows = (await BankAccountModel.update(account_number, body))
+        .modifiedCount;
       response.status = 200;
       response.body = {
         success: true,
@@ -174,8 +173,8 @@ export default {
     }
   },
 
-  login: async ({ request, response }: Context) => {
-    const body = ((await request.body()).value);
+  login: ({ request, response }: Context) => {
+    const body = (request.body().value);
     const payload: Payload = {
       iss: `${body.username} ${body.password}`,
       exp: djwt.setExpiration(new Date().getTime() + 60 * 60 * 1000),

@@ -8,11 +8,20 @@ const ACCOUNTS_COLLECTION_NAME: string =
   "bankAccounts";
 const TRANSACTIONS_COLLECTION_NAME: string =
   Deno.env.get("TRANSACTIONS_COLLECTION_NAME") || "transactions";
+const JWT_KEY: CryptoKey = await crypto.subtle.generateKey(
+  { name: "HMAC", hash: "SHA-512" },
+  true,
+  ["sign", "verify"],
+);
+const JWT_EXPIRES_IN: number = Number(Deno.env.get("JWT_EXPIRES_IN")) ||
+  3600 * 60 * 24;
 
 export {
   ACCOUNTS_COLLECTION_NAME,
   DB_NAME,
   env,
+  JWT_EXPIRES_IN,
+  JWT_KEY,
   PORT,
   TRANSACTIONS_COLLECTION_NAME,
   URI,
