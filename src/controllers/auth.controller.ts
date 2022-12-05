@@ -6,7 +6,6 @@ import { generateAccountNumber } from "../utils/account_number_gen.ts";
 
 export default {
   register: async ({ request, response }: Context) => {
-    console.log("register");
     const body = request.body();
     const { password } = await body.value;
     if (!password) {
@@ -14,17 +13,13 @@ export default {
       response.body = { msg: "Please specify a password" };
       return;
     }
-    console.log("password is", password);
     const hashedPassword = await bcrypt.hash(password);
-    console.log("hashed password is ", hashedPassword);
     const user: BankAccount = {
       account_number: generateAccountNumber(),
       password: hashedPassword,
       balance: 0,
     };
-    console.log("user is", user);
     const account: BankAccount = await bankAccounts.add(user);
-    console.log("account is", account);
     if (account) {
       response.status = 201;
       response.body = {
