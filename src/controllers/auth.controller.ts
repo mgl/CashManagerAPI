@@ -25,7 +25,10 @@ export default {
       response.body = {
         success: true,
         message: "Account created successfully",
-        data: account,
+        data: {
+          account_number: account.account_number,
+          balance: account.balance,
+        },
       };
     } else {
       response.status = 500;
