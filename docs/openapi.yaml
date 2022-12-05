@@ -9,9 +9,22 @@ paths:
       summary: Get all bank account
       description: Show all bank account
       responses:
-        '200':
+        "200":
           description: "OK"
-        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_number:
+                    type: number
+                  firstname:
+                    type: string
+                  lastname:
+                    type: string
+                  balance:
+                    type: number
+        "400":
           description: "Bad Request"
 
     post:
@@ -20,19 +33,6 @@ paths:
       responses:
         "201":
           description: "The record was added successfully"
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                account_number:
-                  type: number
-                firstname:
-                  type: string
-                lastname:
-                  type: string
-                balance:
-                  type: number
         "400"
           description: "No data provided"
         content:
@@ -75,6 +75,19 @@ paths:
           schema:
             type: integer
           required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  description: Updated firstname of the bank account
+                  type: string
+                lastname:
+                  description: Updated lastname of the bank account
+                  type: string
       responses:
         "200":
           description: "OK"
