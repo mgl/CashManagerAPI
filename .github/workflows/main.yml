@@ -37,3 +37,12 @@ jobs:
 
     - name: Print image url
       run: echo "Image pushed to ${{ steps.push-to-registry.outputs.registry-paths }}"
+      
+    - name: Deploy instance
+      uses: jawher/action-scw@v2.6.2
+      env:
+        SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+        SCW_ORGANIZATION_ID: 614f226f-39e7-4f67-b709-89eece4ea874
+        SCW_ZONE: fr-par-1
+      with:
+        args: container container deploy a0a0b3eb-bf1e-4c84-837d-0f7e3373fb2f
