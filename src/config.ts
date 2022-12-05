@@ -15,6 +15,7 @@ const JWT_KEY: CryptoKey = await crypto.subtle.generateKey(
 );
 const JWT_EXPIRES_IN: number = Number(Deno.env.get("JWT_EXPIRES_IN")) ||
   3600 * 24;
+const EXCLUDED_ROUTES: string[] = [ "/api/auth/login", "/api/auth/register", "/api/healthcheck" ];
 
 export {
   ACCOUNTS_COLLECTION_NAME,
@@ -25,4 +26,5 @@ export {
   PORT,
   TRANSACTIONS_COLLECTION_NAME,
   URI,
+  EXCLUDED_ROUTES
 };
