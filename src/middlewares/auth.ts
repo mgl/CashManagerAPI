@@ -11,9 +11,10 @@ const authMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {
   try {
     if (jwtToken && await verifyJwt(jwtToken)) {
       await next();
+      return;
     }
   } catch (_e) {
-    // Dont do anything
+    // Respond with 401
   }
   ctx.response.body = { status: false, message: "Unauthorized" };
   ctx.response.status = 401;

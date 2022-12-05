@@ -14,7 +14,7 @@ const JWT_KEY: CryptoKey = await crypto.subtle.generateKey(
   ["sign", "verify"],
 );
 const JWT_EXPIRES_IN: number = Number(Deno.env.get("JWT_EXPIRES_IN")) ||
-  3600 * 60 * 24;
+  3600 * 24;
 
 export {
   ACCOUNTS_COLLECTION_NAME,

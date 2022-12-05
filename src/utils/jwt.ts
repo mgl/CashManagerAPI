@@ -12,11 +12,9 @@ export const createJwt = async (
     account_number,
     exp: getNumericDate(JWT_EXPIRES_IN),
   };
-  const jwt = await create(header, payload, JWT_KEY);
-  return jwt;
+  return await create(header, payload, JWT_KEY);
 };
 
 export const verifyJwt = async (jwt: string) => {
-  const isValid = await verify(jwt, JWT_KEY);
-  return isValid;
+  return await verify(jwt, JWT_KEY);
 };
