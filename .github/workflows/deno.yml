@@ -13,17 +13,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      mongo:
-        image: mongo
-        env:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: root
-          MONGO_INITDB_DATABASE: cashmanager
-        ports:
-          - 27017:27017
-
     steps:
+        
       - name: Setup repo
         uses: actions/checkout@v3
 
@@ -35,11 +26,14 @@ jobs:
       - name: Verify formatting
         run: deno fmt --check
 
-      #- name: Run linter
-      #  run: deno lint
+      - name: Run linter
+        run: deno lint
 
       - name: Run server
-        run: deno run --allow-net --allow-read --allow-env src/server.ts
+        env:
+          DB_URI: ${{ secrets.DB_URI }}
+          DB_NAME: cashmanagertest
+        run: deno run -A src/server.ts &
 
       - name: Run tests
         run: deno test --allow-net
