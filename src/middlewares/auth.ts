@@ -2,16 +2,21 @@ import { Context } from "../../deps.ts";
 import { verifyJwt } from "../utils/jwt.ts";
 
 const authMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {
-  const jwtToken: string = ctx.request.headers.get("Authorization")
-    ? ctx.request.headers.get("Authorization")!
-    : "";
-  const isValid = await verifyJwt(jwtToken);
-  if (!isValid) {
-    ctx.response.body = { msg: "Unauthorized" };
-    ctx.response.status = 401;
+  if (ctx.request.url.pathname.startsWith("/api/auth")) {
+    await next();
     return;
   }
-  await next();
+  const jwtToken: string =
+    ctx.request.headers.get("Authorization")?.replace("Bearer ", "") || "";
+  try {
+    if (jwtToken && await verifyJwt(jwtToken)) {
+      await next();
+    }
+  } catch (_e) {
+    // Dont do anything
+  }
+  ctx.response.body = { status: false, message: "Unauthorized" };
+  ctx.response.status = 401;
 };
 
 export default authMiddleware;

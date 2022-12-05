@@ -25,14 +25,6 @@ export default {
     toAccountNumber: number,
     amount: number,
   ) {
-    console.log(
-      "Transfering money from",
-      fromAccountNumber,
-      "to",
-      toAccountNumber,
-      "for",
-      amount,
-    );
     if (fromAccountNumber === toAccountNumber) {
       throw new Error("Cannot transfer to the same account");
     }
