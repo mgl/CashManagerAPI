@@ -9,17 +9,12 @@ on:
 permissions:
   contents: read
 
-env:
-  APP_MONGO_USER: root
-  APP_MONGO_PASS: root
-  APP_MONGO_DB: cashmanager
-
 jobs:
   test:
     runs-on: ubuntu-latest
 
     services:
-      mongodb:
+      mongo:
         image: mongo
         env:
           MONGO_INITDB_ROOT_USERNAME: root
@@ -41,7 +36,7 @@ jobs:
         run: deno fmt --check
 
       #- name: Run linter
-      ##  run: deno lint
+      #  run: deno lint
 
       - name: Run server
         run: deno run --allow-net --allow-read --allow-env src/server.ts
