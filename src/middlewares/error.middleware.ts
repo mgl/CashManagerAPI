@@ -14,7 +14,7 @@ const errorMiddleware = async (
       response.type = "json";
     } else {
       response.status = 500;
-      response.body = { message: err.message };
+      response.body = { success: false, message: err.message };
       response.type = "json";
     }
   }
