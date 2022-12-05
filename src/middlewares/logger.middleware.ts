@@ -21,7 +21,7 @@ const logger = async (
   const status: number = response.status;
   const log_string = `[${
     format(new Date(Date.now()), "MM-dd-yyyy hh:mm:ss.SSS")
-  }  Oak::logger] ${request.ip} "${request.method} ${request.url.pathname}" ${
+  }] ${request.ip} "${request.method} ${request.url.pathname}" ${
     String(status)
   } ${User} ${responseTime}`;
   status >= 500
