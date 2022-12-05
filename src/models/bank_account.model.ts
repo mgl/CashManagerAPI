@@ -1,5 +1,5 @@
 import db from "../db/mongo.ts";
-import { BankAccount } from "../interfaces/bankAccount.ts";
+import { BankAccount } from "../interfaces/bank_account.interface.ts";
 import { ACCOUNTS_COLLECTION_NAME } from "../config.ts";
 
 const database = db.getDb;

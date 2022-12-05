@@ -1,5 +1,5 @@
 import { Router } from "../../deps.ts";
-import bankAccountController from "../controllers/bankAccount.ts";
+import bankAccountController from "../controllers/bank_accounts.controller.ts";
 
 const router = new Router();
 

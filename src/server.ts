@@ -1,17 +1,18 @@
 import { Application } from "../deps.ts";
-import Logger from "./middlewares/logger.ts";
-import ErrorMiddleware from "./middlewares/error.ts";
-import AuthMiddleware from "./middlewares/auth.ts";
-import routerAccount from "./routes/bankAccount.ts";
-import routerTransaction from "./routes/transactions.ts";
-import healthRouter from "./routes/healthcheck.ts";
-import authRouter from "./routes/auth.ts";
+import Logger from "./middlewares/logger.middleware.ts";
+import ErrorMiddleware from "./middlewares/error.middleware.ts";
+import AuthMiddleware from "./middlewares/auth.middleware.ts";
+import routerAccount from "./routes/bank_accounts.router.ts";
+import routerTransaction from "./routes/transactions.router.ts";
+import healthRouter from "./routes/healthcheck.router.ts";
+import authRouter from "./routes/auth.router.ts";
 import { PORT as port } from "./config.ts";
 
 const app = new Application();
 
 app.use(Logger.logger);
 app.use(Logger.responseTime);
+
 app.use(ErrorMiddleware);
 app.use(AuthMiddleware);
 

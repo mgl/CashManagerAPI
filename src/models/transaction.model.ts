@@ -1,5 +1,5 @@
 import db from "../db/mongo.ts";
-import { Transaction } from "../interfaces/transaction.ts";
+import { Transaction } from "../interfaces/transaction.interface.ts";
 import { TRANSACTIONS_COLLECTION_NAME } from "../config.ts";
 
 const database = db.getDb;

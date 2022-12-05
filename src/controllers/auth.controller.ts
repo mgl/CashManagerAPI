@@ -1,7 +1,7 @@
-import bankAccounts from "../models/bankAccount.ts";
+import bankAccounts from "../models/bank_account.model.ts";
 import { bcrypt, Context } from "../../deps.ts";
 import { createJwt } from "../utils/jwt.ts";
-import { BankAccount } from "../interfaces/bankAccount.ts";
+import { BankAccount } from "../interfaces/bank_account.interface.ts";
 import { generateAccountNumber } from "../utils/account_number_gen.ts";
 
 export default {

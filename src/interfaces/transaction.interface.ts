@@ -1,4 +1,4 @@
-import { BankAccount } from "./bankAccount.ts";
+import { BankAccount } from "./bank_account.interface.ts";
 
 export interface Transaction {
   date: Date;

@@ -1,5 +1,5 @@
 import { Router } from "../../deps.ts";
-import Transactions from "../controllers/transactions.ts";
+import Transactions from "../controllers/transactions.controller.ts";
 
 const router = new Router();
 

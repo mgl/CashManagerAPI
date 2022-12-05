@@ -1,5 +1,5 @@
-import bankModel from "../models/bankAccount.ts";
-import transactionModel from "../models/transaction.ts";
+import bankModel from "../models/bank_account.model.ts";
+import transactionModel from "../models/transaction.model.ts";
 
 /**
  * @description Attempts a bank transaction between two accounts.
