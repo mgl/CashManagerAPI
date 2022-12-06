@@ -78,7 +78,7 @@ Deno.test("Update Account 1", async () => {
   const body = {
     "firstname": "Ichigo",
     "lastname": "Kurosaki",
-    "balance": 100
+    "balance": 100,
   };
 
   const response = await fetch(
@@ -101,7 +101,7 @@ Deno.test("Transaction Account 1 to Account 2", async () => {
   const body = {
     "amount": 100,
     "fromAccountNumber": globalObject.accountNumber1,
-    "toAccountNumber": globalObject.accountNumber2
+    "toAccountNumber": globalObject.accountNumber2,
   };
 
   const response = await fetch(
@@ -185,4 +185,3 @@ Deno.test("Delete Accounts", async () => {
   const jsonResponse2 = await response2.json();
   assertEquals(jsonResponse2.success, true);
 });
-
