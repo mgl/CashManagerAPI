@@ -39,8 +39,6 @@ Deno.test("Login", async () => {
     "password": globalObject.password,
   };
 
-  console.log(globalObject);
-
   const response = await fetch(baseUrl + "/api/auth/login", {
     method: "POST",
     headers: {
