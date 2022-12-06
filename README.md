@@ -1,5 +1,6 @@
 ![Build badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CI)
 ![Deploy badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CD?label=deployment)
+![Code quality badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Sonar%20scan?label=Code analysis)
 
 # CashManagerAPI
 
@@ -21,6 +22,10 @@ The API is deployed on [Scaleway](https://www.scaleway.com/en/):
 
 This project uses [Github Actions](.github/workflows) to build and deploy the
 [Docker image](Dockerfile)
+
+### Code analysis
+
+A Sonarqube server is available at (http://933d2591-5311-4881-a0a7-4060c15ba4fe.pub.instances.scw.cloud/dashboard?id=mgl_CashManagerAPI_AYTntOgpZPQMggcry85i)
 
 ## Get started
 
