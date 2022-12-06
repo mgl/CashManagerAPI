@@ -11,13 +11,19 @@ This is the API Backend of the Cash Manager project.
 [Deno](https://deno.land) + [Oak](https://oakserver.github.io/oak) +
 [MongoDB](https://www.mongodb.com)
 
-## Deployed version
+## CI/CD
 
-The API is deployed on Scaleway: (https://cashmanagerfggvocmz-cashmanagerapi.functions.fnc.fr-par.scw.cloud)
+The API is deployed on [Scaleway](https://www.scaleway.com/en/): (https://cashmanagerfggvocmz-cashmanagerapi.functions.fnc.fr-par.scw.cloud)
+
+This project uses (Github Actions)(.github/workflows) to build and deploy the (Docker image)[Dockerfile]
 
 ## Get started
 
-### Using [Docker Dev](https://docs.docker.com/desktop/dev-environments)
+If you just want to start the server:
+
+> docker compose up
+
+### Develop using [Docker Dev](https://docs.docker.com/desktop/dev-environments)
 
 Clone and open the Deno container:
 
