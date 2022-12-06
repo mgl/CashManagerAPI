@@ -1,6 +1,6 @@
 ![Build badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CI)
 ![Deploy badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CD?label=deployment)
-![Code quality badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Sonar%20scan?label=Code analysis)
+![Code quality badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Sonar%20scan?label=Code%20analysis)
 
 # CashManagerAPI
 
