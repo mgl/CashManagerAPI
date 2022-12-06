@@ -1,36 +1,30 @@
 version: "3"
 services:
-  sonarqube:
-    image: sonarqube
-    restart: unless-stopped
+  mongo:
+    image: mongo:6
+    restart: always
     environment:
-      - SONARQUBE_JDBC_USERNAME=sonarqube
-      - SONARQUBE_JDBC_PASSWORD=sonarpass
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonarqube
-    ports:
-      - "9000:9000"
-      - "9092:9092"
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: cashmanager
     volumes:
-      - sonarqube_conf:/opt/sonarqube/conf
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+      - mongodb:/data/db
+    expose:
+      - 27017
 
-  db:
-    image: postgres
-    restart: unless-stopped
+  deno:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    restart: always
     environment:
-      - POSTGRES_USER=sonarqube
-      - POSTGRES_PASSWORD=sonarpass
-      - POSTGRES_DB=sonarqube
-    volumes:
-      - sonarqube_db:/var/lib/postgresql
-      - postgresql_data:/var/lib/postgresql/data
+      DB_URI: ${DB_URI}
+      PORT: 80
+      DB: cashmanager
+    depends_on:
+      - mongo
+    ports:
+      - 80:80
 
 volumes:
-  postgresql_data:
-  sonarqube_bundled-plugins:
-  sonarqube_conf:
-  sonarqube_data:
-  sonarqube_db:
-  sonarqube_extensions:
+  mongodb:
