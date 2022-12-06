@@ -25,7 +25,8 @@ This project uses [Github Actions](.github/workflows) to build and deploy the
 
 ### Code analysis
 
-A Sonarqube server is available at (http://933d2591-5311-4881-a0a7-4060c15ba4fe.pub.instances.scw.cloud/dashboard?id=mgl_CashManagerAPI_AYTntOgpZPQMggcry85i)
+A Sonarqube server is available at
+(http://933d2591-5311-4881-a0a7-4060c15ba4fe.pub.instances.scw.cloud/dashboard?id=mgl_CashManagerAPI_AYTntOgpZPQMggcry85i)
 
 ## Get started
 
