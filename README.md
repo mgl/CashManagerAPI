@@ -15,7 +15,7 @@ This is the API Backend of the Cash Manager project.
 
 The API is deployed on [Scaleway](https://www.scaleway.com/en/): (https://cashmanagerfggvocmz-cashmanagerapi.functions.fnc.fr-par.scw.cloud)
 
-This project uses (Github Actions)(.github/workflows) to build and deploy the (Docker image)[Dockerfile]
+This project uses [Github Actions](.github/workflows) to build and deploy the [Docker image](Dockerfile)
 
 ## Get started
 
