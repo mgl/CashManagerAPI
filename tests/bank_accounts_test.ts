@@ -3,19 +3,19 @@ import { assertEquals } from "https://deno.land/std@0.165.0/testing/asserts.ts";
 const baseUrl = "http://localhost:8080";
 
 const globalObject = {
-  tokenJwt: '',
-  accountNumber: '',
-  firstname: 'Ichigo',
-  lastname: 'Kurosaki',
+  tokenJwt: "",
+  accountNumber: "",
+  firstname: "Ichigo",
+  lastname: "Kurosaki",
   password: "shinigami",
-  balance: 0
+  balance: 0,
 };
 
 Deno.test("Create Account", async () => {
   const body = {
     "firstname": globalObject.firstname,
     "lastname": globalObject.lastname,
-    "password": globalObject.password
+    "password": globalObject.password,
   };
 
   const response = await fetch(baseUrl + "/api/auth/register", {
@@ -30,8 +30,7 @@ Deno.test("Create Account", async () => {
   assertEquals(jsonResponse.success, true);
   assertEquals(jsonResponse.message, "Account created successfully");
 
-  globalObject.accountNumber = jsonResponse.data.account_number
-  
+  globalObject.accountNumber = jsonResponse.data.account_number;
 });
 
 Deno.test("Login", async () => {
@@ -62,37 +61,43 @@ Deno.test("Update Account", async () => {
   const body = {
     "firstname": "Naruto",
     "lastname": "Uzumaki",
-    "balance": 100
-  }
+    "balance": 100,
+  };
 
   globalObject.firstname = body.firstname;
   globalObject.lastname = body.lastname;
   globalObject.balance = body.balance;
 
-  const response = await fetch(baseUrl + `/api/accounts/${globalObject.accountNumber}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${globalObject.tokenJwt}`
+  const response = await fetch(
+    baseUrl + `/api/accounts/${globalObject.accountNumber}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${globalObject.tokenJwt}`,
+      },
+      body: JSON.stringify(body),
     },
-    body: JSON.stringify(body),
-  });
+  );
 
   const jsonResponse = await response.json();
   assertEquals(jsonResponse.success, true);
 });
 
 Deno.test("Get Account", async () => {
-  const response = await fetch(baseUrl + `/api/accounts/${globalObject.accountNumber}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${globalObject.tokenJwt}`
+  const response = await fetch(
+    baseUrl + `/api/accounts/${globalObject.accountNumber}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${globalObject.tokenJwt}`,
+      },
     },
-  });
+  );
 
   const jsonResponse = await response.json();
-  const datas = jsonResponse.data
+  const datas = jsonResponse.data;
   assertEquals(jsonResponse.success, true);
   assertEquals(datas.account_number, globalObject.accountNumber);
   assertEquals(datas.balance, globalObject.balance);
@@ -105,7 +110,7 @@ Deno.test("Get All Accounts", async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${globalObject.tokenJwt}`
+      "Authorization": `Bearer ${globalObject.tokenJwt}`,
     },
   });
 
@@ -114,13 +119,16 @@ Deno.test("Get All Accounts", async () => {
 });
 
 Deno.test("Delete Account by num account", async () => {
-  const response = await fetch(baseUrl + `/api/accounts/${globalObject.accountNumber}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${globalObject.tokenJwt}`
+  const response = await fetch(
+    baseUrl + `/api/accounts/${globalObject.accountNumber}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${globalObject.tokenJwt}`,
+      },
     },
-  });
+  );
 
   const jsonResponse = await response.json();
   assertEquals(jsonResponse.success, true);
