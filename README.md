@@ -1,5 +1,5 @@
-[![Build badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CI)]
-[![Deploy badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CD?label=deployment)]
+![Build badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CI)
+![Deploy badge](https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CD?label=deployment)
 
 # CashManagerAPI
 
