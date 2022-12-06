@@ -1,3 +1,5 @@
+https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CI https://img.shields.io/github/workflow/status/mgl/CashManagerAPI/Deno%20CD?label=deployment
+
 # CashManagerAPI
 
 This is the API Backend of the Cash Manager project.
