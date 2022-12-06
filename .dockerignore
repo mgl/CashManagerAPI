@@ -5,3 +5,4 @@ tests/
 docker-compose.yaml
 compose-dev.yaml
 README.md
+sonar-project.properties
