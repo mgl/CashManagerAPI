@@ -10,7 +10,10 @@ const authMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {
   const jwtToken: string =
     ctx.request.headers.get("Authorization")?.replace("Bearer ", "") || "";
   try {
-    if (jwtToken && await verifyJwt(jwtToken)) {
+    // Add the user to the context
+    if (jwtToken) {
+      const payload = await verifyJwt(jwtToken);
+      ctx.state = payload;
       await next();
       return;
     }

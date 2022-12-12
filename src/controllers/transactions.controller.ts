@@ -1,5 +1,6 @@
 import { Request, Response } from "../../deps.ts";
 import BankOperations from "../business/bank_operations.ts";
+import { BankAccount } from "../interfaces/bank_account.interface.ts";
 
 export default {
   /**
@@ -18,10 +19,22 @@ export default {
    * @route POST /api/transactions
    */
   async createTransaction(
-    { request, response }: { request: Request; response: Response },
+    { request, response, state }: {
+      request: Request;
+      response: Response;
+      state: BankAccount;
+    },
   ) {
-    const body = await request.body({ type: "json" });
+    const body = request.body({ type: "json" });
     const { fromAccountNumber, toAccountNumber, amount } = await body.value;
+
+    // Reject if fromAccountNumber is not current user_account
+    // This is to prevent a user from transferring from another account
+    if (Number(fromAccountNumber) != state.account_number) {
+      response.status = 400;
+      response.body = { message: "Cannot transfer from other account" };
+      return;
+    }
 
     try {
       await BankOperations.transfer(fromAccountNumber, toAccountNumber, amount);
