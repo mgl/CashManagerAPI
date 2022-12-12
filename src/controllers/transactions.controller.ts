@@ -30,7 +30,7 @@ export default {
 
     // Reject if fromAccountNumber is not current user_account
     // This is to prevent a user from transferring from another account
-    if (Number(fromAccountNumber) != state.account_number) {
+    if (Number(fromAccountNumber) !== state.account_number) {
       response.status = 400;
       response.body = { message: "Cannot transfer from other account" };
       return;
