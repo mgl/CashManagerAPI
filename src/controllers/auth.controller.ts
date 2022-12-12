@@ -8,6 +8,8 @@ export default {
   register: async ({ request, response }: Context) => {
     const body = request.body();
     const { password } = await body.value;
+    const { firstname } = await body.value;
+    const { lastname } = await body.value;
     if (!password) {
       response.status = 400;
       response.body = { msg: "Please specify a password" };
@@ -17,6 +19,8 @@ export default {
     const user: BankAccount = {
       account_number: generateAccountNumber(),
       password: hashedPassword,
+      firstname: firstname,
+      lastname: lastname,
       balance: 0,
     };
     const account: BankAccount = await bankAccounts.add(user);
