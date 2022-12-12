@@ -8,4 +8,4 @@ RUN deno cache deps.ts
 ADD . .
 RUN deno cache src/server.ts
 
-CMD ["run", "--allow-net", "--allow-env", "--allow-read", "--allow-sys", "src/server.ts"]
+CMD ["run", "--allow-net", "--allow-env", "--allow-read", "src/server.ts"]
