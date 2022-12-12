@@ -1,11 +1,13 @@
-FROM denoland/deno:alpine-1.28.3
+FROM denoland/deno:distroless-1.28.3
 
 WORKDIR /app
 
 COPY deps.ts .
-RUN deno cache deps.ts
+RUN ["deno", "cache", "deps.ts"]
 
 ADD . .
-RUN deno cache src/server.ts
+RUN ["deno", "cache", "src/server.ts"]
 
-CMD ["run", "--allow-net", "--allow-env", "--allow-read", "src/server.ts"]
+USER nonroot
+
+CMD ["run", "--allow-net", "--allow-env", "/app/src/server.ts"]
