@@ -20,7 +20,7 @@ export {
   red,
   yellow,
 } from "https://deno.land/std@0.170.0/fmt/colors.ts";
-export { format } from "https://deno.land/std@0.167.0/datetime/mod.ts";
+export { format } from "https://deno.land/std@0.170.0/datetime/mod.ts";
 export { Request } from "https://deno.land/x/oak@v11.1.0/request.ts";
 export { Response } from "https://deno.land/x/oak@v11.1.0/response.ts";
 export {
