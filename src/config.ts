@@ -26,7 +26,7 @@ if (Deno.env.get("DB_NAME") === "cashmanagertest") {
   ];
 } else {
   excluded_routes = [
-    "/api/auth/register",
+    "/api/auth/login",
     "/api/healthcheck",
   ];
 }
