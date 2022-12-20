@@ -16,16 +16,16 @@ const JWT_KEY: CryptoKey = await crypto.subtle.generateKey(
 const JWT_EXPIRES_IN: number = Number(Deno.env.get("JWT_EXPIRES_IN")) ||
   3600 * 24;
 
-const EXCLUDED_ROUTES: string[] = [""];
+let excluded_routes: string[] = [""];
 
 if (Deno.env.get("DB_NAME") === "cashmanagertest") {
-  const EXCLUDED_ROUTES: string[] = [
+  excluded_routes = [
     "/api/auth/login",
     "/api/auth/register",
     "/api/healthcheck",
   ];
 } else {
-  const EXCLUDED_ROUTES: string[] = [
+  excluded_routes = [
     "/api/auth/register",
     "/api/healthcheck",
   ];
@@ -35,7 +35,7 @@ export {
   ACCOUNTS_COLLECTION_NAME,
   DB_NAME,
   env,
-  EXCLUDED_ROUTES,
+  excluded_routes,
   JWT_EXPIRES_IN,
   JWT_KEY,
   PORT,
