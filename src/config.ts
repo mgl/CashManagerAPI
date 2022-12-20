@@ -22,12 +22,12 @@ if (Deno.env.get("DB_NAME") === "cashmanagertest") {
   const EXCLUDED_ROUTES: string[] = [
     "/api/auth/login",
     "/api/auth/register",
-    "/api/healthcheck"
+    "/api/healthcheck",
   ];
 } else {
   const EXCLUDED_ROUTES: string[] = [
     "/api/auth/register",
-    "/api/healthcheck"
+    "/api/healthcheck",
   ];
 }
 
